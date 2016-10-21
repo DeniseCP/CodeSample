@@ -25,7 +25,7 @@ public class Thermometer {
 	}
 
 	public static void alert(List<Integer> list, String unit) throws Exception {
-		threasholdFound = new ArrayList<>();
+		threasholdFound = new ArrayList<>(); 
 		if (!isEmpty(list)) {
 			try {
 				if (notEmpty(temperatures)) {
