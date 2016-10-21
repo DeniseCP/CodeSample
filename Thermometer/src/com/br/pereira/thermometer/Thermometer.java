@@ -11,6 +11,7 @@ public class Thermometer {
 
 	private static List<Temperature> temperatures = null;
 	private List<Temperature> lastTemperatures = new ArrayList<>();
+	private static List<Temperature> threasholdFound = null;
 
 	enum Direction {
 		UP, DOWN
@@ -21,12 +22,13 @@ public class Thermometer {
 			try {
 				temperatures = Parser.parseArray(arrayOfT);
 			} catch (InvalidUnitTemperature e) {
-				System.out.println("Impossible to return a result. Please enter valid temperatures.");
+				e.getStackTrace();
 			}
 		}
 	}
 
-	public static void alert(List<Double> list, String unit) throws Exception {
+	public static void alert(List<Integer> list, String unit) throws Exception {
+		threasholdFound = new ArrayList<>();
 		if (!isEmpty(list)) {
 			try {
 				if (notEmpty(temperatures)) {
@@ -34,65 +36,73 @@ public class Thermometer {
 						Temperature t = new Temperature();
 						t.setTemperature(temp.convert(unit));
 						t.setUnit(unit);
-						if (list.contains(t.getTemperature())) {
-							System.out.println(t.toString());
+						if (list.contains(t.getTemperature().intValue())) {
+							threasholdFound.add(t);
 						}
 					}
+				}
+				if (threasholdFound.size() <= 0) {
+					System.out.println(Messages.MSG_NO_RECORD_FOUND);
+				} else {
+					output(threasholdFound);
 				}
 			} catch (InvalidUnitTemperature e) {
 				System.out.println(e.getMessage());
 			} catch (NullPointerException n) {
 				System.out.println(Messages.MSG_ERROR_EMPTY_TEMP);
 			}
+		} else {
+			System.out.println(Messages.MSG_NO_RECORD_FOUND);
 		}
 	}
 
 	public static void alert(List<Double> list, Double variation, String unit) {
-		if (!isEmpty(list) && variation != null) {
+		threasholdFound = new ArrayList<>();
+		if (!isListEmpty(list) && variation != null) {
 			try {
 				if (notEmpty(temperatures)) {
-					for(Double i : list){
+					for (Double i : list) {
 						for (Temperature temp : temperatures) {
 							Temperature t = new Temperature();
 							t.setTemperature(temp.convert(unit));
 							t.setUnit(unit);
-							if ((i+variation)!=(t.getTemperature()) 
-									&& (i.equals(t.getTemperature())
-											&& (i-variation!=t.getTemperature()))) {
-								System.out.println(t.toString());
+							if ((i + variation) != (t.getTemperature())
+									&& (i.equals(t.getTemperature()) && (i - variation != t.getTemperature()))) {
+								threasholdFound.add(t);
 							}
 						}
 					}
 				}
+				if (threasholdFound.size() <= 0) {
+					System.out.println(Messages.MSG_NO_RECORD_FOUND);
+				} else {
+					output(threasholdFound);
+				}
 			} catch (InvalidUnitTemperature e) {
 				System.out.println(e.getMessage());
 			} catch (NullPointerException n) {
-				System.out.println(Messages.MSG_ERROR_EMPTY_TEMP); 
+				System.out.println(Messages.MSG_ERROR_EMPTY_TEMP);
 			}
+		} else {
+			System.out.println(Messages.MSG_NO_RECORD_FOUND);
 		}
 	}
 
-	public static void alert(List<Double> list, Double varUp, Double varDown) {
-		if (!isEmpty(list) && varUp != null && varDown != null) {
-
-		}
-	}
-
-	public static void alert(List<Double> list, Direction dir) {
+	public static void alert(List<Integer> list, Direction dir) {
 		if (!isEmpty(list) && dir != null) {
-
+			// TODO
 		}
 	}
 
-	public static void alert(List<Double> list, Double variation, Direction dir) {
+	public static void alert(List<Integer> list, Double variation, Direction dir) {
 		if (!isEmpty(list) && variation != null && dir != null) {
-
+			// TODO
 		}
 	}
 
-	public static void alert(List<Double> list, Double variationUp, Double variationDown, Direction dir) {
-		if (!isEmpty(list)) {
-
+	private static void output(List<Temperature> threasholdFound) {
+		for (Temperature t : threasholdFound) {
+			System.out.println(t.toString());
 		}
 	}
 
@@ -102,7 +112,12 @@ public class Thermometer {
 	}
 
 	@SuppressWarnings("null")
-	private static boolean isEmpty(List<Double> list) {
+	private static boolean isEmpty(List<Integer> list) {
+		return (list == null && list.size() < 0);
+	}
+
+	@SuppressWarnings("null")
+	private static boolean isListEmpty(List<Double> list) {
 		return (list == null && list.size() < 0);
 	}
 
