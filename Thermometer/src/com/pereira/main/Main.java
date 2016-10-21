@@ -7,8 +7,8 @@ import com.br.pereira.thermometer.Thermometer;
 
 public class Main {
 
-	public static void main(String[] args) {
-		String array[] = { "0 C", "100 C", "2.5 C", "100.5 C", "101°C", "4C" };
+	public static void main(String[] args) throws Exception {
+		String array[] = { "0 C", "100 S", "2.5 C", "100.5 C", "101°C", "4C" };
 		List<Integer> limiar = new ArrayList<>();
 		limiar.add(212);
 		limiar.add(32);
