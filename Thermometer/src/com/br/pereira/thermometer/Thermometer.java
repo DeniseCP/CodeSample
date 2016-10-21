@@ -67,7 +67,7 @@ public class Thermometer {
 			} catch (InvalidUnitTemperature e) {
 				System.out.println(e.getMessage());
 			} catch (NullPointerException n) {
-				System.out.println(Messages.MSG_ERROR_EMPTY_TEMP);
+				System.out.println(Messages.MSG_ERROR_EMPTY_TEMP); 
 			}
 		}
 	}
