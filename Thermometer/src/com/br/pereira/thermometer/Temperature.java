@@ -42,9 +42,9 @@ public class Temperature {
 			return convertToFahenheit();
 		} else if (unit.equals(Unit.C.getValue()) && !this.unit.equals(unit)) {
 			return convertToCelsius();
+		}else{
+			return temperature;
 		}
-		
-		return null;
 	}
 
 	private Double convertToCelsius() {

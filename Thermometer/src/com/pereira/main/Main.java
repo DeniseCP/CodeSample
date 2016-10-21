@@ -7,15 +7,17 @@ import com.br.pereira.thermometer.Thermometer;
 
 public class Main {
 
-	public static void main(String[] args) {
-		String array[] = { "0 C", "100 C", "2.5 C", "100.5 C", "101°C", "4C" };
-		List<Integer> limiar = new ArrayList<>();
-		limiar.add(212);
-		limiar.add(32);
+	public static void main(String[] args) throws Exception {
+		String array[] = { "0 C", "100 C", "2.5 C", "100.5 C", "100°C", "0C", "99.5C" };
+		List<Double> limiar = new ArrayList<>();
+		limiar.add(100.0);
+		limiar.add(0.0);
 
 		Thermometer.initThemometer(array);
 
-		Thermometer.alert(limiar, "F");
+		//Thermometer.alert(limiar, "C");
+		
+		Thermometer.alert(limiar, 0.5, "C");
 
 	}
 
