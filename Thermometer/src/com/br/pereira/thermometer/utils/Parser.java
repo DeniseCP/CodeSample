@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.br.pereira.thermometer.Temperature;
+import com.br.pereira.thermometer.constants.Unit;
+import com.br.pereira.thermometer.exception.InvalidUnitTemperature;
 
-public class Reader {
+public class Parser {
 
-	public static List<Temperature> readArray(String[] arrayOfT) {
+	public static List<Temperature> parseArray(String[] arrayOfT) {
 		List<Temperature> list = new ArrayList<>();
 
 		try {
@@ -22,14 +24,22 @@ public class Reader {
 		return list;
 	}
 
-	private static Temperature split(String nav) {
+	private static Temperature split(String nav) throws InvalidUnitTemperature {
 		Temperature temp = new Temperature();
 		if (nav != null && !nav.trim().equals("")) {
 			String t = nav.replaceAll("[^\\d*\\.?\\d*]", "");
 			String u = nav.replaceAll("[^A-Za-z]+", "");
-			
+
 			temp.setTemperature(new Double(t));
-			temp.setUnit(u);
+
+			try {
+				if (u.equalsIgnoreCase(Unit.F.getValue()) || u.equalsIgnoreCase(Unit.C.getValue())) {
+
+					temp.setUnit(u);
+				}
+			} catch (Exception e) {
+				throw new InvalidUnitTemperature();
+			}
 		}
 		return temp;
 	}
