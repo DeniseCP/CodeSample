@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.br.pereira.thermometer.Thermometer;
+import com.br.pereira.thermometer.constants.Direction;
+
 
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		String array[] = { "0 C", "100 C", "2.5 C", "100.5 C", "100°C", "0C", "99.5C" };
+		String array[] = { "0 C", "100 C", "2.5 C", "100.5 C", "101°C", "0C", "99.5C" };
 		List<Integer> limiar = new ArrayList<>();
 		limiar.add(100);
 		limiar.add(0);
@@ -25,7 +27,7 @@ public class Main {
 		
 		//Thermometer.alert(threashold, 0.5, "C");
 		
-		
+		Thermometer.alert(threashold, Direction.UP, 0.5, "C");
 
 	}
 

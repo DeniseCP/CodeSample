@@ -3,6 +3,7 @@ package com.br.pereira.thermometer;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.br.pereira.thermometer.constants.Direction;
 import com.br.pereira.thermometer.constants.Messages;
 import com.br.pereira.thermometer.exception.InvalidUnitTemperature;
 import com.br.pereira.thermometer.utils.Parser;
@@ -12,10 +13,6 @@ public class Thermometer {
 	private static List<Temperature> temperatures = null;
 	private List<Temperature> lastTemperatures = new ArrayList<>();
 	private static List<Temperature> threasholdFound = null;
-
-	enum Direction {
-		UP, DOWN
-	};
 
 	public static void initThemometer(String[] arrayOfT) throws InvalidUnitTemperature {
 		if (!isEmpty(arrayOfT)) {
@@ -88,15 +85,53 @@ public class Thermometer {
 		}
 	}
 
-	public static void alert(List<Integer> list, Direction dir) {
-		if (!isEmpty(list) && dir != null) {
-			// TODO
-		}
-	}
+	public static void alert(List<Double> list, Direction dir, Double variation, String unit)
+			throws InvalidUnitTemperature {
+		if (!isListEmpty(list) && dir != null) {
+			threasholdFound = new ArrayList<>();
 
-	public static void alert(List<Integer> list, Double variation, Direction dir) {
-		if (!isEmpty(list) && variation != null && dir != null) {
-			// TODO
+			try {
+				for (Double i : list) {
+					for (Temperature temp : temperatures) {
+						Temperature t = new Temperature();
+						t.setTemperature(temp.convert(unit));
+						t.setUnit(unit);
+						switch (dir.getValue()) {
+						case "UP":
+							if ((i.equals(t.getTemperature()) || t.getTemperature() > (i + variation))) {
+								threasholdFound.add(t);
+
+							}
+							break;
+						case "DOWN":
+							if ((i.equals(t.getTemperature()) || t.getTemperature() < (i - variation))) {
+								threasholdFound.add(t);
+
+							}
+						default:
+							System.out.println(Messages.MSG_NO_RECORD_FOUND);
+							break;
+						}
+					}
+				}
+
+				if (threasholdFound.size() <= 0) {
+					System.out.println(Messages.MSG_NO_RECORD_FOUND);
+				} else {
+					output(threasholdFound);
+				}
+
+			} catch (
+
+			InvalidUnitTemperature e) {
+				System.out.println(e.getMessage());
+			} catch (NullPointerException n) {
+				System.out.println(Messages.MSG_ERROR_EMPTY_TEMP);
+			}
+		} else
+
+		{
+			System.out.println(Messages.MSG_NO_RECORD_FOUND);
 		}
 	}
 
