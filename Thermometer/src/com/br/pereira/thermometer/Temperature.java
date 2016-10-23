@@ -36,6 +36,37 @@ public class Temperature {
 		return "Temperature:" + temperature + unit;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((temperature == null) ? 0 : temperature.hashCode());
+		result = prime * result + ((unit == null) ? 0 : unit.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Temperature other = (Temperature) obj;
+		if (temperature == null) {
+			if (other.temperature != null)
+				return false;
+		} else if (!temperature.equals(other.temperature))
+			return false;
+		if (unit == null) {
+			if (other.unit != null)
+				return false;
+		} else if (!unit.equals(other.unit))
+			return false;
+		return true;
+	}
+
 	public Double convert(String unit) throws InvalidUnitTemperature {
 
 		if (unit.equals(Unit.F.getValue()) && !this.unit.equals(unit)) {

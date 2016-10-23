@@ -20,7 +20,7 @@ public class Parser {
 			}
 			System.out.println("Temperatures parsed...");
 		} catch (Exception e) {
-			list = null;
+			list = new ArrayList<>();
 			System.out.println(e.getMessage());
 		}
 		return list;
