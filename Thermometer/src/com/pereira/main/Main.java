@@ -21,13 +21,14 @@ public class Main {
 		threashold.add(32.0);
 
 		
-		Thermometer.initThemometer(array);
+		Thermometer themomether = new Thermometer(array);
 
+		
 		//Thermometer.alert(limiar, "C");
 		
 		//Thermometer.alert(threashold, 0.5, "C");
 		
-		Thermometer.alert(threashold, Direction.UP, 0.9, "F");
+		themomether.alert(threashold, Direction.UP, 0.9, "F");
 		
 		/*List<Temperature>list = new ArrayList<>();
 		list.add(new Temperature("C", 0.0));

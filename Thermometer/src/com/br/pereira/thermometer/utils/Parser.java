@@ -5,12 +5,12 @@ import java.util.List;
 
 import com.br.pereira.thermometer.Temperature;
 import com.br.pereira.thermometer.constants.Messages;
-import com.br.pereira.thermometer.constants.Unit;
-import com.br.pereira.thermometer.exception.InvalidUnitTemperature;
+import com.br.pereira.thermometer.constants.Scale;
+import com.br.pereira.thermometer.exception.InvalidScaleTemperature;
 
 public class Parser {
 
-	public static List<Temperature> parseArray(String[] arrayOfT) throws InvalidUnitTemperature {
+	public static List<Temperature> parseArray(String[] arrayOfT) throws InvalidScaleTemperature {
 		List<Temperature> list = new ArrayList<>();
 
 		try {
@@ -26,18 +26,18 @@ public class Parser {
 		return list;
 	}
 
-	private static Temperature split(String nav) throws InvalidUnitTemperature {
+	private static Temperature split(String nav) throws InvalidScaleTemperature {
 		Temperature temp = new Temperature();
 		if (nav != null && !nav.trim().equals("")) {
 			String t = nav.replaceAll("[^\\d*\\.?\\d*]", "");
 			String u = nav.replaceAll("[^A-Za-z]+", "");
 
-			if (u.equalsIgnoreCase(Unit.F.getValue()) || u.equalsIgnoreCase(Unit.C.getValue())) {
-				temp.setTemperature(new Double(t));
-				temp.setUnit(u);
+			if (u.equalsIgnoreCase(Scale.F.getValue()) || u.equalsIgnoreCase(Scale.C.getValue())) {
+				temp.setUnit(new Double(t));
+				temp.setScale(u);
 				return temp;
 			} else {
-				throw new InvalidUnitTemperature(Messages.MSG_ERROR_PARSE + t +" "+ u);
+				throw new InvalidScaleTemperature(Messages.MSG_ERROR_PARSE + t +" "+ u);
 			}
 
 		}

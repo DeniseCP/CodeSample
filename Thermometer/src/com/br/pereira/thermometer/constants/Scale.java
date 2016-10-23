@@ -1,12 +1,12 @@
 package com.br.pereira.thermometer.constants;
 
-public enum Unit {
+public enum Scale {
 
 	F("F"),C("C");
 	
 	private String value;
 	
-	Unit(String value){
+	Scale(String value){
 		this.value = value;
 	}
 	

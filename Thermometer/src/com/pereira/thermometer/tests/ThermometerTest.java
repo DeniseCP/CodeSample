@@ -19,6 +19,8 @@ public class ThermometerTest {
 	List<Integer> threashold = new ArrayList<>();
 	List<Double> threashold2 = new ArrayList<>();
 
+	Thermometer thermomether = null;
+	
 	PrintStream outOld = System.out;
 
 	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -30,10 +32,9 @@ public class ThermometerTest {
 		
 		threashold2.add(100.0);
 		threashold2.add(0.0);
+	
+		thermomether = new Thermometer(arrayOfT);
 		
-
-		Thermometer.initThemometer(arrayOfT);
-
 		System.setOut(new PrintStream(outContent));
 	}
 
@@ -41,7 +42,7 @@ public class ThermometerTest {
 	public void testAlertListOfIntegerString() {
 		try {
 
-			Thermometer.alert(threashold, "C");
+			thermomether.alert(threashold, "C");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,7 +61,7 @@ public class ThermometerTest {
 	public void testAlertListOfDoubleDoubleString() {
 		try {
 
-			Thermometer.alert(threashold2,0.5, "C");
+			thermomether.alert(threashold2,0.5, "C");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -78,7 +79,7 @@ public class ThermometerTest {
 	public void testAlertListOfDoubleDirectionDoubleString() {
 		try {
 
-			Thermometer.alert(threashold2,Direction.DOWN, 0.5, "C");
+			thermomether.alert(threashold2,Direction.DOWN, 0.5, "C");
 
 		} catch (Exception e) {
 			e.printStackTrace();

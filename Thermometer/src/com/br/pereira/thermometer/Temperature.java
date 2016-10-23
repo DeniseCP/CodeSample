@@ -1,47 +1,47 @@
 package com.br.pereira.thermometer;
 
-import com.br.pereira.thermometer.constants.Unit;
-import com.br.pereira.thermometer.exception.InvalidUnitTemperature;
+import com.br.pereira.thermometer.constants.Scale;
+import com.br.pereira.thermometer.exception.InvalidScaleTemperature;
 
 public class Temperature {
 
-	private String unit;
-	private Double temperature;
+	private String scale;
+	private Double unit;
 
 	public Temperature() {
 	}
 
-	public Temperature(String unit, Double temperature) {
+	public Temperature(String scale, Double unit) {
+		this.scale = scale;
 		this.unit = unit;
-		this.temperature = temperature;
 	}
 
-	public String getUnit() {
+	public String getScale() {
+		return scale;
+	}
+
+	public void setScale(String scale) {
+		this.scale = scale;
+	}
+
+	public Double getUnit() {
 		return unit;
 	}
 
-	public void setUnit(String unit) {
+	public void setUnit(Double unit) {
 		this.unit = unit;
 	}
 
-	public Double getTemperature() {
-		return temperature;
-	}
-
-	public void setTemperature(Double temperature) {
-		this.temperature = temperature;
-	}
-
 	public String toString() {
-		return "Temperature:" + temperature + unit;
+		return "Temperature:" + unit + scale;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((temperature == null) ? 0 : temperature.hashCode());
 		result = prime * result + ((unit == null) ? 0 : unit.hashCode());
+		result = prime * result + ((scale == null) ? 0 : scale.hashCode());
 		return result;
 	}
 
@@ -54,39 +54,39 @@ public class Temperature {
 		if (getClass() != obj.getClass())
 			return false;
 		Temperature other = (Temperature) obj;
-		if (temperature == null) {
-			if (other.temperature != null)
-				return false;
-		} else if (!temperature.equals(other.temperature))
-			return false;
 		if (unit == null) {
 			if (other.unit != null)
 				return false;
 		} else if (!unit.equals(other.unit))
 			return false;
+		if (scale == null) {
+			if (other.scale != null)
+				return false;
+		} else if (!scale.equals(other.scale))
+			return false;
 		return true;
 	}
 
-	public Double convert(String unit) throws InvalidUnitTemperature {
+	public Double convert(String scale) throws InvalidScaleTemperature {
 		try {
-			if (unit.equals(Unit.F.getValue()) && !this.unit.equals(unit)) {
+			if (scale.equals(Scale.F.getValue()) && !this.scale.equals(scale)) {
 				return convertToFahenheit();
-			} else if (unit.equals(Unit.C.getValue()) && !this.unit.equals(unit)) {
+			} else if (scale.equals(Scale.C.getValue()) && !this.scale.equals(scale)) {
 				return convertToCelsius();
-			} else if (!unit.equals(Unit.C.getValue()) && !this.unit.equals(unit) && !unit.equals(Unit.F.getValue())) {
-				throw new InvalidUnitTemperature();
+			} else if (!scale.equals(Scale.C.getValue()) && !this.scale.equals(scale) && !scale.equals(Scale.F.getValue())) {
+				throw new InvalidScaleTemperature();
 			}
 		} catch (Exception e) {
-			return temperature = new Double(0.0);
+			return unit = new Double(0.0);
 		}
-		return temperature;
+		return unit;
 	}
 
 	private Double convertToCelsius() {
-		return ((temperature - 32) / 1.8);
+		return ((unit - 32) / 1.8);
 	}
 
 	private Double convertToFahenheit() {
-		return ((temperature * 1.8) + 32);
+		return ((unit * 1.8) + 32);
 	}
 }
