@@ -26,7 +26,6 @@ public class Thermometer {
 		}
 	}
 
-<<<<<<< HEAD
 	public Thermometer(Path path) throws IOException {
 		try {
 			if (path.toString().contains("txt")) {
@@ -47,7 +46,7 @@ public class Thermometer {
 		try {
 			File file = new File(path.toString());
 			temperatures = Parser.parseXML(file);
-		} catch (InvalidScaleTemperature  e) {
+		} catch (InvalidScaleTemperature | IOException  e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -71,8 +70,6 @@ public class Thermometer {
 		}
 	}
 
-=======
->>>>>>> refs/remotes/origin/master
 	private static void initThemometer(String[] arrayOfT) throws InvalidScaleTemperature {
 		if (!isEmpty(arrayOfT)) {
 			try {

@@ -32,7 +32,6 @@ public class Parser {
 		return list;
 	}
 
-<<<<<<< HEAD
 	public static List<Temperature> parseList(List<String> temp) {
 		List<Temperature> list = new ArrayList<>();
 
@@ -49,8 +48,6 @@ public class Parser {
 		return list;
 	}
 
-=======
->>>>>>> refs/remotes/origin/master
 	private static Temperature split(String nav) throws InvalidScaleTemperature {
 		Temperature temp = new Temperature();
 		if (nav != null && !nav.trim().equals("")) {
@@ -62,11 +59,7 @@ public class Parser {
 				temp.setScale(u);
 				return temp;
 			} else {
-<<<<<<< HEAD
 				throw new InvalidScaleTemperature(Messages.MSG_ERROR_PARSE + t + " " + u);
-=======
-				throw new InvalidScaleTemperature(Messages.MSG_ERROR_PARSE + t +" "+ u);
->>>>>>> refs/remotes/origin/master
 			}
 
 		}
