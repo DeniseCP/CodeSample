@@ -26,6 +26,7 @@ public class Thermometer {
 		}
 	}
 
+<<<<<<< HEAD
 	public Thermometer(Path path) throws IOException {
 		try {
 			if (path.toString().contains("txt")) {
@@ -70,6 +71,8 @@ public class Thermometer {
 		}
 	}
 
+=======
+>>>>>>> refs/remotes/origin/master
 	private static void initThemometer(String[] arrayOfT) throws InvalidScaleTemperature {
 		if (!isEmpty(arrayOfT)) {
 			try {
