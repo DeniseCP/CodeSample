@@ -52,7 +52,7 @@ public class Thermometer {
 	}
 
 	private void initThermometerCsv(Path path) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 
 	}
 
