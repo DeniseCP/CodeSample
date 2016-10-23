@@ -45,7 +45,7 @@ public class TemperatureTest {
 		Double d = 0.0;
 
 		try {
-			assertEquals(d, tempC.convert("A"));
+			assertEquals(d, tempC.convert("X"));
 		} catch (InvalidUnitTemperature e) {
 			e.printStackTrace();
 		}
