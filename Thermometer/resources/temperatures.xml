@@ -1,0 +1,37 @@
+<thermometer>
+	<temperature>
+		<scale>C</scale>
+		<unit>0</unit>
+	</temperature>
+
+	<temperature>
+		<scale>C</scale>
+		<unit>0.5</unit>
+	</temperature>
+	
+	<temperature>
+		<scale>0</scale>
+		<unit>A</unit>
+	</temperature>
+	
+	<temperature>
+        <scale>C</scale>
+        <unit>-1</unit>
+    </temperature>
+    
+	<temperature>
+        <scale>C</scale>
+        <unit>1.5</unit>
+    </temperature>
+    
+	<temperature>
+        <scale>C</scale>
+        <unit>2</unit>
+    </temperature>
+    
+	<temperature>
+        <scale>C</scale>
+        <unit>0</unit>
+    </temperature>
+
+</thermometer>

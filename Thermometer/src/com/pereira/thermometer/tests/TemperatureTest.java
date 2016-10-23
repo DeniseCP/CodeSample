@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.br.pereira.thermometer.Temperature;
-import com.br.pereira.thermometer.exception.InvalidUnitTemperature;
+import com.br.pereira.thermometer.exception.InvalidScaleTemperature;
 
 public class TemperatureTest {
 	Temperature tempC;
@@ -24,7 +24,7 @@ public class TemperatureTest {
 
 		try {
 			assertEquals(d, tempC.convert("F"));
-		} catch (InvalidUnitTemperature e) {
+		} catch (InvalidScaleTemperature e) {
 			e.printStackTrace();
 		}
 	}
@@ -35,7 +35,7 @@ public class TemperatureTest {
 
 		try {
 			assertEquals(d, tempF.convert("C"));
-		} catch (InvalidUnitTemperature e) {
+		} catch (InvalidScaleTemperature e) {
 			e.printStackTrace();
 		}
 	}
@@ -46,7 +46,7 @@ public class TemperatureTest {
 
 		try {
 			assertEquals(d, tempC.convert("A"));
-		} catch (InvalidUnitTemperature e) {
+		} catch (InvalidScaleTemperature e) {
 			e.printStackTrace();
 		}
 	}

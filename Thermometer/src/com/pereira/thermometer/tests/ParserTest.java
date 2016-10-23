@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.br.pereira.thermometer.Temperature;
-import com.br.pereira.thermometer.exception.InvalidUnitTemperature;
+import com.br.pereira.thermometer.exception.InvalidScaleTemperature;
 import com.br.pereira.thermometer.utils.Parser;
 
 public class ParserTest {
@@ -34,7 +34,7 @@ public class ParserTest {
 
 		try {
 			assertEquals(new HashSet<>(list), new HashSet<>(Parser.parseArray(array)));
-		} catch (InvalidUnitTemperature e) {
+		} catch (InvalidScaleTemperature e) {
 			e.printStackTrace();
 		}
 	}
@@ -44,7 +44,7 @@ public class ParserTest {
 		list = new ArrayList<>();
 		try {
 			assertEquals(new HashSet<>(list), new HashSet<>(Parser.parseArray(array1)));
-		} catch (InvalidUnitTemperature e) {
+		} catch (InvalidScaleTemperature e) {
 			e.printStackTrace();
 		}
 	}

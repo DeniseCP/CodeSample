@@ -1,6 +1,6 @@
 package com.br.pereira.thermometer.exception;
 
-public class InvalidUnitTemperature extends Exception {
+public class InvalidScaleTemperature extends Exception {
 
 	/**
 	 * 
@@ -9,11 +9,11 @@ public class InvalidUnitTemperature extends Exception {
 
 	private String string;
 
-	public InvalidUnitTemperature(String string) {
+	public InvalidScaleTemperature(String string) {
 		this.string = string;
 	}
 
-	public InvalidUnitTemperature() {
+	public InvalidScaleTemperature() {
 		// TODO Auto-generated constructor stub
 	}
 
