@@ -46,7 +46,7 @@ public class Thermometer {
 		try {
 			File file = new File(path.toString());
 			temperatures = Parser.parseXML(file);
-		} catch (InvalidScaleTemperature | IOException  e) {
+		} catch (InvalidScaleTemperature  e) {
 			System.out.println(e.getMessage());
 		}
 	}

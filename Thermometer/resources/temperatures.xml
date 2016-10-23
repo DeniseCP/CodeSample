@@ -36,12 +36,4 @@
     </temperature>
 
 </thermometer>
-=======
-<temperatures>
-    <temperature>
-        <scale></scale>
-        <unit></unit>
-    </temperature>
-    
-</temperatures>
->>>>>>> refs/remotes/origin/master
+
