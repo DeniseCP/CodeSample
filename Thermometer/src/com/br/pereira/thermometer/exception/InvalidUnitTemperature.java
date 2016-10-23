@@ -13,6 +13,10 @@ public class InvalidUnitTemperature extends Exception {
 		this.string = string;
 	}
 
+	public InvalidUnitTemperature() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public String getMessage() {
 		return string;

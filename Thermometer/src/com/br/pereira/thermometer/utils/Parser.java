@@ -14,13 +14,13 @@ public class Parser {
 		List<Temperature> list = new ArrayList<>();
 
 		try {
-			System.out.println("Passing array of temperatures...");
+			//System.out.println("Passing array of temperatures...");
 			for (String nav : arrayOfT) {
 				list.add(split(nav));
 			}
-			System.out.println("Temperatures parsed...");
+			//System.out.println("Temperatures parsed...");
 		} catch (Exception e) {
-			list = null;
+			list = new ArrayList<>();
 			System.out.println(e.getMessage());
 		}
 		return list;

@@ -36,22 +36,57 @@ public class Temperature {
 		return "Temperature:" + temperature + unit;
 	}
 
-	public Double convert(String unit) throws InvalidUnitTemperature {
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((temperature == null) ? 0 : temperature.hashCode());
+		result = prime * result + ((unit == null) ? 0 : unit.hashCode());
+		return result;
+	}
 
-		if (unit.equals(Unit.F.getValue()) && !this.unit.equals(unit)) {
-			return convertToFahenheit();
-		} else if (unit.equals(Unit.C.getValue()) && !this.unit.equals(unit)) {
-			return convertToCelsius();
-		}else{
-			return temperature;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Temperature other = (Temperature) obj;
+		if (temperature == null) {
+			if (other.temperature != null)
+				return false;
+		} else if (!temperature.equals(other.temperature))
+			return false;
+		if (unit == null) {
+			if (other.unit != null)
+				return false;
+		} else if (!unit.equals(other.unit))
+			return false;
+		return true;
+	}
+
+	public Double convert(String unit) throws InvalidUnitTemperature {
+		try {
+			if (unit.equals(Unit.F.getValue()) && !this.unit.equals(unit)) {
+				return convertToFahenheit();
+			} else if (unit.equals(Unit.C.getValue()) && !this.unit.equals(unit)) {
+				return convertToCelsius();
+			} else if (!unit.equals(Unit.C.getValue()) && !this.unit.equals(unit) && !unit.equals(Unit.F.getValue())) {
+				throw new InvalidUnitTemperature();
+			}
+		} catch (Exception e) {
+			return temperature = new Double(0.0);
 		}
+		return temperature;
 	}
 
 	private Double convertToCelsius() {
-		return((temperature - 32) / 1.8);
+		return ((temperature - 32) / 1.8);
 	}
 
 	private Double convertToFahenheit() {
-		return((temperature * 1.8) + 32);
+		return ((temperature * 1.8) + 32);
 	}
 }

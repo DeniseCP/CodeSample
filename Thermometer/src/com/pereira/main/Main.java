@@ -17,8 +17,8 @@ public class Main {
 
 		
 		List<Double> threashold = new ArrayList<>();
-		threashold.add(100.0);
-		threashold.add(0.0);
+		threashold.add(212.0);
+		threashold.add(32.0);
 
 		
 		Thermometer.initThemometer(array);
@@ -27,7 +27,17 @@ public class Main {
 		
 		//Thermometer.alert(threashold, 0.5, "C");
 		
-		Thermometer.alert(threashold, Direction.UP, 0.5, "C");
+		Thermometer.alert(threashold, Direction.UP, 0.9, "F");
+		
+		/*List<Temperature>list = new ArrayList<>();
+		list.add(new Temperature("C", 0.0));
+		list.add(new Temperature("C", 100.0));
+		list.add(new Temperature("C", 95.5));
+		list.add(new Temperature("C", 101.0));
+		
+		String []array = { "0 C", "100 C", "95.5C", "101°C" };
+		
+		System.out.println(new HashSet<>(list).equals(new HashSet<>(Parser.parseArray(array))));*/
 
 	}
 
