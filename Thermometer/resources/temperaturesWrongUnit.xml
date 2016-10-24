@@ -11,7 +11,7 @@
 	
 	<temperature>
 		<scale>C</scale>
-		<unit>0</unit>
+		<unit>A</unit>
 	</temperature>
 
 </thermometer>

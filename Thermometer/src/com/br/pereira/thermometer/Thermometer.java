@@ -27,33 +27,30 @@ public class Thermometer {
 	}
 
 	public Thermometer(Path path) throws IOException {
-		try {
-			if (path.toString().contains("txt")) {
-				initThermometerTxt(path);
-			} else if (path.toString().contains("xml")) {
-				initThermometerXml(path);
-			} else if (path.toString().contains("csv")) {
-				initThermometerCsv(path);
+		if (path.toFile().exists()) {
+			try {
+				if (path.toString().contains("txt")) {
+					initThermometerTxt(path);
+				} else if (path.toString().contains("xml")) {
+					initThermometerXml(path);
+					
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			;
+			System.out.println(Messages.MSG_SUCCESS);
+		} else {
+			System.out.println(Messages.MSG_FILE_NOT_FOUND);
 		}
-
 	}
 
 	private void initThermometerXml(Path path) throws InvalidScaleTemperature {
 		try {
 			File file = new File(path.toString());
 			temperatures = Parser.parseXML(file);
-		} catch (InvalidScaleTemperature  e) {
+		} catch (InvalidScaleTemperature e) {
 			System.out.println(e.getMessage());
 		}
-	}
-
-	private void initThermometerCsv(Path path) {
-		// TODO Auto-generated method stub 
-
 	}
 
 	private void initThermometerTxt(Path path) throws IOException, InvalidScaleTemperature {

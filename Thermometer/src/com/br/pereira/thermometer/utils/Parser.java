@@ -1,6 +1,7 @@
 package com.br.pereira.thermometer.utils;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class Parser {
 			for (String nav : temp) {
 				list.add(split(nav));
 			}
-			System.out.println("Temperatures parsed...");
+			//System.out.println("Temperatures parsed...");
 		} catch (Exception e) {
 			list = new ArrayList<>();
 			System.out.println(e.getMessage());
@@ -77,14 +78,17 @@ public class Parser {
 				Element element = doc.getDocumentElement();
 
 				list.addAll(getTemperatures(element));
-				
+
 				return list;
+			}
+			else{
+				throw new IOException(Messages.MSG_FILE_NOT_FOUND);
 			}
 		} catch (Exception ex) {
 			list = new ArrayList<>();
-			ex.getMessage();
+			System.out.println(ex.getMessage());
 		}
-		return null;
+		return list;
 	}
 
 	private static List<Temperature> getTemperatures(Element element) throws InvalidScaleTemperature {
@@ -98,19 +102,20 @@ public class Parser {
 				String scale = getScale(e);
 				Double unit = getUnit(e);
 
-				if (scale.equalsIgnoreCase(Scale.F.getValue()) || scale.equalsIgnoreCase(Scale.C.getValue())) {
+				if (scale.equalsIgnoreCase(Scale.F.getValue()) || scale.equalsIgnoreCase(Scale.C.getValue()) && unit!=null) {
 					list.add(new Temperature(scale, unit));
 				} else {
 					list = new ArrayList<>();
 					throw new InvalidScaleTemperature(Messages.MSG_ERROR_PARSE + unit + " " + scale);
 				}
 			}
-			System.out.println("Parsed...");
+			//System.out.println("Parsed...");
 			return list;
 		} catch (Exception e) {
+			list = new ArrayList<>();
 			System.out.println(e.getMessage());
 		}
-		return null;
+		return list;
 	}
 
 	private static String getScale(Element element) throws InvalidScaleTemperature {
@@ -128,7 +133,12 @@ public class Parser {
 		Double unit = 0.0;
 		for (int i = 0; i < nodes.getLength(); i++) {
 			Element e = (Element) nodes.item(i);
-			unit = new Double(e.getTextContent());
+			try {
+				unit = Double.parseDouble(e.getTextContent());
+			} catch (Exception ex) {
+				unit = null;
+				ex.getMessage();
+			}
 		}
 		return unit;
 	}
